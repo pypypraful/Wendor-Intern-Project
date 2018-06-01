@@ -52,6 +52,9 @@ const upload = multer({storage});
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+var myprofileRouter = require('./routes/myprofile');
+var myoffersRouter = require('./routes/myoffers');
+var machinesRouter = require('./routes/machines');
 
 //Init App
 var app = express();
@@ -88,6 +91,9 @@ app.use(passport.session());
 app.use('/admin',adminRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/myprofile',myprofileRouter);
+app.use('/myoffers',myoffersRouter);
+app.use('/machines',machinesRouter);
 
 
 //catch 404 and forward to error handler
