@@ -1,0 +1,28 @@
+.apple{
+    font-family: "Monotype Corsiva" ;
+    font-weight: 300;
+}
+html {
+  background: url(/images/bac.jpg) no-repeat center fixed;
+  background-size: cover;
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+h1 {
+    margin: 0 0 10px 0;
+    font-weight: 400;
+    font-size: 45px;
+    font-family: "Bradley Hand ITC" ;
+}
+h5 {
+    margin: 0 0 5 0;
+    font-weight: 400;
+    font-size: 30px;
+    font-family: "Monotype Corsiva" ;
+}
