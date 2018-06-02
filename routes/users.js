@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var Jimp = require("jimp");
 
 var User = require('../models/user');
 //register
@@ -13,7 +14,7 @@ router.get('/register',function(req,res){
 router.get('/login',function(req, res){
   res.render('login');
 });
-
+var imgerr = 0;
 //register User
 router.post('/register',function(req,res){
   var first_name = req.body.first_name;
@@ -23,46 +24,51 @@ router.post('/register',function(req,res){
   var password1 = req.body.password1;
   var password2 = req.body.password2;
   var number = req.body.number;
-
+  var image = Jimp.read(req.body.avatar).catch(function (err) {
+                                                            console.error(err);
+                                                            imgerr = err;
+                                                            return null;
+                                                              });
 
   //Validation
-  console.log('1');
   req.checkBody('first_name','Name is required').notEmpty();
-  console.log('2');
   req.checkBody('username','Username is required').notEmpty();
-  console.log('3');
   req.checkBody('email','E-mail is required').notEmpty();
-  console.log('4');
   req.checkBody('email','E-mail is not valid').isEmail();
-  console.log('5');
   req.checkBody('password1','Password is required').notEmpty();
-  console.log('6');
   req.checkBody('password2','Passwords do not match').equals(req.body.password1);
-  console.log('7');
   req.checkBody('number','Phone Number is required').notEmpty();
-console.log('hey joekhd h');
+
+
   var errors = req.validationErrors();
   if(errors){
     res.render('register',{
-      errors: errors
+      errors: "All marked fields are required"
     });
   } else{
     var newUser = new User({
-      name: firstname+""+lastname,
+      name: first_name+""+last_name,
       email: email,
       username: username,
       password: password1,
-      number: number
+      number: number,
+      avataraddress: `/public/userimages/${username}`
     });
-
     User.createUser(newUser, function(err,user){
-      if(err) throw err;
+      if(err){
+        res.render('register',{
+        errors:"Unique username required"
+      });
+    }else{
       console.log(user);
+      if(!imgerr){
+        image.resize(250, Jimp.AUTO);
+        image.write(`/public/userimages/${username}`);
+      }
+    //  req.flash("success_msg",'You are registered and now you can login');
+      res.redirect('/users/login');
+    }
     });
-
-    req.flash("success_msg",'You are registered and now you can login');
-
-    res.redirect('/users/login');
   }
 });
 

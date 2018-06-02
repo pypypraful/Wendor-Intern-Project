@@ -4,7 +4,10 @@
 			<div class="col s6">
 				<h1>Login</h1>
 				<div class="divider"></div>
-				<form action="#" class="col s12">
+				{{#if errors}}
+						<div class="alert alert-danger">{{errors}}</div>
+				{{/if}}
+				<form action="/users/login" class="col s12">
 					<div class="row input-field">
 					  <input id="username" type="text" class="validate" data-length="15">
 					  <label for="username">Username</label>
@@ -14,7 +17,7 @@
 					  <label for="password">Password</label>
 					</div>
 					<div class="row">
-				  		<a href ="#" class="btn waves-effect waves-light btn-small col s6" type="submit" name="action">SIGN IN</a></form>
+				  		<button class="btn waves-effect waves-light btn-small col s6" type="submit" name="action">SIGN IN</button></form>
 						<a href ="/users/register" class="btn waves-effect waves-light btn-small col s6" type="submit" name="action">SIGN UP</a>
 					</div>
 			</div>
