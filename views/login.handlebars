@@ -4,21 +4,24 @@
 			<div class="col s6">
 				<h1>Login</h1>
 				<div class="divider"></div>
-				{{#if errors}}
-						<div class="alert alert-danger">{{errors}}</div>
+				{{#if error}}
+					<body onload = "M.toast({html: '{{error}}'})"></body>
 				{{/if}}
-				<form action="/users/login" class="col s12">
+				{{#if success_msg}}
+					<body onload = "M.toast({html: '{{success_msg}}'})"></body>
+				{{/if}}
+				<form method="post" action="/users/login" class="col s12">
 					<div class="row input-field">
-					  <input id="username" type="text" class="validate" data-length="15">
+					  <input id="username" type="text" class="validate" data-length="15" name="username">
 					  <label for="username">Username</label>
 					</div>
 					<div class="row input-field">
-					  <input id="password" type="password" class="validate">
+					  <input id="password" type="password" class="validate" name="password">
 					  <label for="password">Password</label>
 					</div>
 					<div class="row">
 				  		<button class="btn waves-effect waves-light btn-small col s6" type="submit" name="action">SIGN IN</button></form>
-						<a href ="/users/register" class="btn waves-effect waves-light btn-small col s6" type="submit" name="action">SIGN UP</a>
+						<a href ="/users/register" class="btn waves-effect waves-light btn-small col s6" name="action">SIGN UP</a>
 					</div>
 			</div>
 			<div class="col s1">

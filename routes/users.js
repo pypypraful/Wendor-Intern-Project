@@ -9,7 +9,7 @@ var User = require('../models/user');
 router.get('/register',function(req,res){
   res.render('register');
 });
-
+var error=0;
 //Login
 router.get('/login',function(req, res){
   res.render('login');
@@ -47,7 +47,7 @@ router.post('/register',function(req,res){
     });
   } else{
     var newUser = new User({
-      name: first_name+""+last_name,
+      name: first_name+" "+last_name,
       email: email,
       username: username,
       password: password1,
@@ -65,7 +65,7 @@ router.post('/register',function(req,res){
         image.resize(250, Jimp.AUTO);
         image.write(`/public/userimages/${username}`);
       }
-    //  req.flash("success_msg",'You are registered and now you can login');
+      req.flash("success_msg",'You are registered and now you can login');
       res.redirect('/users/login');
     }
     });
@@ -82,7 +82,7 @@ passport.use(new LocalStrategy(
       User.comparePassword(password, user.password, function(err,isMatch){
         if(err) throw err;
         if(isMatch){
-          return done(null,user);
+          done(null,user,{ message: `Welcome back ${user.name}!`});
         } else{
           return done(null, false, {message: 'Invalid Password'});
         }
@@ -100,10 +100,9 @@ passport.deserializeUser(function(id, done){
 });
 
 router.post('/login',
-passport.authenticate('local',{successRedirect:'/', failureRedirect:'/users/login', failureFlash: true}),
-function(req,res){
-  res.redirect('/');
-});
+passport.authenticate('local',{successRedirect:'/', failureRedirect:'/users/login', failureFlash: true, successFlash: true}));
+
+
 
 router.get('/logout', function(req, res){
   req.logout();
