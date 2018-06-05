@@ -8,38 +8,49 @@
 					<div class="col s12 m9 l10">
 
                         <!--Add-Offer Section Started-->
+												{{#if errors}}
+													{{#each errors}}
+													<body onload = "M.toast({html: '{{msg}}'})"></body>
+													{{/each}}
+												{{/if}}
+												{{#if success_msg}}
+													<body onload = "M.toast({html: '{{success_msg}}'})"></body>
+												{{/if}}
+												{{#if error}}
+													<body onload = "M.toast({html: '{{error}}'})"></body>
+												{{/if}}
                         <div id="add-offer" class="section scrollspy">
                             <span class="flow-text"><h5>Add Offer</h5></span>
                             <div class="divider col s3"></div>
                             <div class="row">
-                                <form action="#" class="col s12">
+                                <form method="post" action="/admin_offers/add" class="col s12">
                                   <div class="row">
                                     <div class="input-field col s4">
-                                      <input id="offer_name" type="text" class="validate" data-length="15">
+                                      <input id="offer_name" type="text" class="validate" data-length="15" name="offer_name">
                                       <label for="offer_name">Offer Name</label>
                                     </div>
                                     <div class="input-field col s4">
-                                      <input id="price" type="text" class="validate">
+                                      <input id="price" type="text" class="validate" name="price">
                                       <label for="price">Price</label>
                                     </div>
                                     <div class="input-field col s4">
-                                      <input id="offer_category" type="text" class="validate">
+                                      <input id="offer_category" type="text" class="validate" name="category">
                                       <label for="offer_category">Offer Category</label>
                                     </div>
                                   </div>
                                   <div class="row">
                                     <div class="input-field col s9">
-                                      <input id="short_des" type="text" class="validate" data-length="40">
+                                      <input id="short_des" type="text" class="validate" data-length="40" name="shortinfo">
                                       <label for="short_des">Short Description</label>
                                     </div>
                                     <div class="input-field col s3">
-                                      <input id="offer_validity" type="text" class="validate">
+                                      <input id="offer_validity" type="text" class="validate" name="validity">
                                       <label for="offer_validity">Offer Validity</label>
                                     </div>
                                   </div>
                                   <div class="row">
                                     <div class="input-field col s9">
-                                        <textarea id="full_des" type="text" class="validate materialize-textarea" data-length="80"></textarea>
+                                        <textarea id="full_des" type="text" class="validate materialize-textarea" data-length="80"name="fullinfo"></textarea>
                                       <label for="full_des">Full Description</label>
                                     </div>
                                   </div>
@@ -49,7 +60,7 @@
                                         <input class="file-path validate" type="text">
                                       </div>
                                       <div class="btn waves-effect waves-light btn-small"><span>Choose File</span>
-                                        <input type="file">
+                                        <input type="file"name="offer_image">
                                       </div>
                                     </div>
                                   </div>
@@ -57,24 +68,26 @@
                                 </form>
                               </div>
                         </div>
-                <!--Add-Offer Section Started-->
+                <!--Add-Offer Section ended-->
 
+												<!-- {{#each category}} -->
+						 						<div id={{category[0]}} class="section scrollspy">
+													{{#each offers}}
+							 						<p>{{offers.name}}Content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur deleniti dolor dolorem excepturi illum, inventore minima, nemo odit perferendis repellendus saepe sequi tempore velit. At autem nostrum repudiandae similique voluptas. </p>
+                        </div>
+													{{/each}}
+												<!-- {{/each}} -->
+                        <div id="clothing" class="section scrollspy">
+                        	<p>Con Lorem {{category}}ipsum dolor sit amet, consectetur adipisicing elit. Autem, consectetur debitis doloribus error laboriosam laudantium magnam magni maxime obcaecati omnis quod recusandae repellendus rerum tempora, voluptatem. Distinctio earum necessitatibus perspiciatis? tent </p>
+                        </div>
 
-						 <div id="food" class="section scrollspy">
-							 <p>Content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur deleniti dolor dolorem excepturi illum, inventore minima, nemo odit perferendis repellendus saepe sequi tempore velit. At autem nostrum repudiandae similique voluptas. </p>
-                         </div>
+                        <div id="furniture" class="section scrollspy">
+                          <p>Co Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda consequuntur dignissimos, doloribus eaque facilis impedit laborum laudantium neque nesciunt numquam officia, quae quia sint sit voluptas. Impedit nulla quam quo. ntent </p>
+                        </div>
+              </div>
 
-                          <div id="clothing" class="section scrollspy">
-                            <p>Con Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, consectetur debitis doloribus error laboriosam laudantium magnam magni maxime obcaecati omnis quod recusandae repellendus rerum tempora, voluptatem. Distinctio earum necessitatibus perspiciatis? tent </p>
-                          </div>
-
-                          <div id="furniture" class="section scrollspy">
-                            <p>Co Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda consequuntur dignissimos, doloribus eaque facilis impedit laborum laudantium neque nesciunt numquam officia, quae quia sint sit voluptas. Impedit nulla quam quo. ntent </p>
-                          </div>
-                    </div>
-
-                </div>
-			</div>
+        </div>
+	</div>
 
 
       <!--scrollspy started-->
@@ -82,8 +95,12 @@
 				  <div class="row">
                         <div class="col hide-on-small-only white-text text-white">
                           <ul class="section table-of-contents ">
+
                             <li><a href="#add-offer">Add-Offer</a></li>
-                            <li><a href="#food">Food-offers</a></li>
+														{{#if category}}
+														{{#each category}}
+														<li><a href="#{{{category}}}">{{{category}}}-offers</a></li>
+														{{/each}}{{/if}}
                             <li><a href="#clothing">Clothing-Offers</a></li>
                             <li><a href="#furniture">Furniture Offers</a></li>
                           </ul>

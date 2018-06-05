@@ -22,7 +22,7 @@ var db = mongoose.connection;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var adminRouter = require('./routes/admin');
+var admin_offersRouter = require('./routes/admin_offers');
 var myprofileRouter = require('./routes/myprofile');
 var myoffersRouter = require('./routes/myoffers');
 var machinesRouter = require('./routes/machines');
@@ -79,6 +79,7 @@ app.use(expressValidator({
 //Connect flash
 app.use(flash());
 
+
 //Global vars
 app.use(function(req,res,next){
   res.locals.success_msg = req.flash('success_msg');
@@ -93,7 +94,7 @@ app.use(function(req,res,next){
 
 
 
-app.use('/admin',adminRouter);
+app.use('/admin_offers',admin_offersRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/myprofile',myprofileRouter);
