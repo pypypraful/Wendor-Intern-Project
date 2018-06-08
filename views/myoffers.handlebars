@@ -1,66 +1,50 @@
 <main><!-- Home Body started   -->
-<div class="container row">
-  <div class="card-panel white col s12">
+<div class="row">
+  <div class="white col s8 offset-s1">
     <h1>My Offers</h1>
     <div class="divider"></div>
-
-    <ul class="collapsible">
-      <li>
-        <div class="collapsible-header"><i class="material-icons">filter_drama</i>Food Vouchers</div>
-        <div class="collapsible-body">
-          <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="images/office.jpg">
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">Offer-Card<i class="material-icons right">more_vert</i></span>
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-              <p>Here is some more information about this product that is only revealed once clicked on.</p>
-            </div>
-          </div>
-
-        </div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons">place</i>Game Vouchers</div>
-        <div class="collapsible-body">
-          <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/office.jpg">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Offer-Card<i class="material-icons right">more_vert</i></span>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
-          </div>
-        </div>
-      </div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons">whatshot</i>Clothing Vouchers</div>
-        <div class="collapsible-body">
-          <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/office.jpg">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Offer-Card<i class="material-icons right">more_vert</i></span>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
-          </div>
-        </div>
-      </div>
-      </li>
-    </ul>
+                        <div class="row">
+                          <div class="col s12 m9 l10">
+                            {{#each offers}}
+                                <div id="{{category}}" class="section scrollspy">
+                                  <div class="row">
+                                    <div class="col s6">
+                                      <div class="card small">
+                                        <div class="card-image">
+                                          <img src="{{offer_img_address}}.jpg">
+                                          <span class="card-title">{{name}}</span>
+                                        </div>
+                                        <div class="card-content">
+                                          <p>{{shortinfo}}</p>
+                                          <p>Validity Duration: {{validity}}</p>
+                                          <p> Price: {{price}} </p>
+                                        </div>
+                                        <div class="card-action">
+                                          <a href="#">Buy Now</a>
+                                          <a href="#">Read More..</a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            {{/each}}
+                          </div>
+                      </div>
 
 </div>
-
+                      <!--scrollspy started-->
+                        <div class="rightsidebar teal lighten-5 col s2">
+                          <div class="row">
+                                        <div class="col hide-on-small-only white-text text-white">
+                                          <ul class="section table-of-contents ">
+                                            {{#each categ as |item|}}
+                                            <li><a href="#{{item}}">{{item}}</a></li>
+                                            {{/each}}
+                                          </ul>
+                                        </div>
+                                  </div>
+                              </div>
+                      <!--scrollspy started-->
 
 
 

@@ -6,13 +6,11 @@ var admin_offers = require('../models/admin_offers');
 
 /* GET admin page. */
 router.get('/', function(req, res) {
-  admin_offers.find().then((offers) =>{
+  admin_offers.find({}).then((offers) =>{
     var categories = [];
     function include(arr,obj) {return (arr.indexOf(obj) != -1);}
     for(i=0;i<offers.length;i++) if (include(categories,offers[i].category)== false) categories.push(offers[i].category);
-    categories.sort();
-    console.log(categories[0]);
-    console.log(offers[0].category);
+    console.log(categories);
     res.render('admin_offers', { title: 'Wendor',layout: 'admin-layout.handlebars', offers:offers, category:categories});
   },(error) => {
     if (error) throw error;
@@ -59,7 +57,7 @@ router.post('/add',function(req,res){
       shortinfo: shortinfo,
       validity: validity,
       fullinfo: fullinfo,
-      offer_img_address: `/public/offerimages/${name}`
+      offer_img_address: `/offerimages/${name}`
     });
     admin_offers.createOffer(newOffer, function(err,offer){
       if(err){

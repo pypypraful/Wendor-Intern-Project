@@ -16,3 +16,11 @@ $(document).ready(function(){
 $(document).ready(function(){
  $('.tabs').tabs();
 });
+$(document).ready(function(){
+  $('.carousel').carousel();
+});
+$(document).ready(function(){
+    $('.rightsidebar').pushpin({
+      offset:40
+    });
+  });
